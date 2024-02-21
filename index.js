@@ -1,4 +1,4 @@
-const cursor = document.getElementById('circle');
+const cursor = document.getElementById('cursor');
 let isDeviceFlat = false;
 
 window.addEventListener('deviceorientation', handleOrientation);
@@ -18,7 +18,7 @@ function handleMotion(event) {
     const accelerationY = event.accelerationIncludingGravity.y;
 
     // Simulate mouse movement based on acceleration
-    const sensitivity = 10; // Adjust sensitivity as needed
+    const sensitivity = 5; // Adjust sensitivity as needed
     const offsetX = accelerationX * sensitivity;
     const offsetY = accelerationY * sensitivity;
 
