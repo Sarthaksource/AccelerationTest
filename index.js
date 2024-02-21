@@ -1,6 +1,7 @@
 const circle = document.getElementById('circle');
 let offsetX = 0;
 let offsetY = 0;
+let isDeviceFlat = false;
 
 const tiltThreshold = 15; // Adjust the threshold as needed
 
@@ -12,8 +13,10 @@ function handleOrientation(event) {
   const gamma = event.gamma; // Tilt left-to-right
 
   // Check if the device is nearly flat
-  if (Math.abs(beta) < tiltThreshold && Math.abs(gamma) < tiltThreshold) {
-    // Reset the circle position when the device is flat
+  isDeviceFlat = Math.abs(beta) < tiltThreshold && Math.abs(gamma) < tiltThreshold;
+
+  // Reset the circle position when the device is flat
+  if (isDeviceFlat) {
     offsetX = 0;
     offsetY = 0;
     circle.style.transform = 'translate(0, 0)';
@@ -21,11 +24,10 @@ function handleOrientation(event) {
 }
 
 function handleMotion(event) {
-  const accelerationX = event.accelerationIncludingGravity.x;
-  const accelerationY = event.accelerationIncludingGravity.y;
+  if (isDeviceFlat) {
+    const accelerationX = event.accelerationIncludingGravity.x;
+    const accelerationY = event.accelerationIncludingGravity.y;
 
-  // Check if the device is nearly flat before moving the circle
-  if (Math.abs(event.beta) < tiltThreshold && Math.abs(event.gamma) < tiltThreshold) {
     // Adjust circle position based on acceleration with higher sensitivity
     offsetX += accelerationX * 1.5;
     offsetY -= accelerationY * 1.5;
