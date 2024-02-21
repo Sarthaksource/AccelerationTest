@@ -9,8 +9,8 @@ function handleMotion(event) {
   const accelerationY = event.accelerationIncludingGravity.y;
 
   // Adjust circle position based on acceleration with higher sensitivity
-  offsetX += accelerationX * 1.5; // Increase the scale factor for higher sensitivity
-  offsetY -= accelerationY * 1.5; // Adjust the sign for the Y axis
+  offsetX += accelerationX * 1; // Increase the scale factor for higher sensitivity
+  offsetY -= accelerationY * 1; // Adjust the sign for the Y axis
 
   // Limit the movement to the window bounds
   offsetX = Math.min(window.innerWidth - 50, Math.max(0, offsetX));
