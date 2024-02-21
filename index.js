@@ -18,7 +18,7 @@ function handleMotion(event) {
     const accelerationY = event.accelerationIncludingGravity.y;
 
     // Simulate mouse movement based on acceleration
-    const sensitivity = 5; // Adjust sensitivity as needed
+    const sensitivity = 1.5; // Adjust sensitivity as needed
     const offsetX = accelerationX * sensitivity;
     const offsetY = accelerationY * sensitivity;
 
