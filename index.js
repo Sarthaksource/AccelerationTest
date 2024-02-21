@@ -5,8 +5,8 @@ let offsetY = 0;
 window.addEventListener('devicemotion', handleMotion);
 
 function handleMotion(event) {
-  const accelerationX = event.accelerationIncludingGravity.x;
-  const accelerationY = event.accelerationIncludingGravity.y;
+  const accelerationX = event.acceleration.x;
+  const accelerationY = event.acceleration.y;
 
   // Adjust circle position based on acceleration with higher sensitivity
   offsetX += accelerationX * 1; // Increase the scale factor for higher sensitivity
