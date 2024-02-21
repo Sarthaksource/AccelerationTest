@@ -6,7 +6,7 @@ function handleMotion(event) {
     const accelerationY = event.accelerationIncludingGravity.y;
 
     const x = accelerationX * 100; // Scale factor for movement
-    const y = accelerationY * 5;
+    const y = accelerationY * 100;
     circle.style.left = `${window.innerWidth / 2 + x}px`;
     circle.style.top = `${window.innerHeight / 2 + y}px`;
 }
