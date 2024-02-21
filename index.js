@@ -9,7 +9,7 @@ function handleMotion(event) {
   const accelerationY = event.accelerationIncludingGravity.y;
 
   // Adjust circle position based on acceleration
-  offsetX += accelerationX * 0.1; // Adjust the scale factor as needed
+  offsetX -= accelerationX * 0.1; // Adjust the scale factor as needed
   offsetY += accelerationY * 0.1;
 
   // Limit the movement to the window bounds
