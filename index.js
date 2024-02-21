@@ -1,12 +1,21 @@
 const circle = document.getElementById('circle');
+let offsetX = 0;
+let offsetY = 0;
+
 window.addEventListener('devicemotion', handleMotion);
 
 function handleMotion(event) {
-    const accelerationX = event.accelerationIncludingGravity.x;
-    const accelerationY = event.accelerationIncludingGravity.y;
+  const accelerationX = event.accelerationIncludingGravity.x;
+  const accelerationY = event.accelerationIncludingGravity.y;
 
-    const x = accelerationX * 100; // Scale factor for movement
-    const y = accelerationY * 100;
-    circle.style.left = `${window.innerWidth / 2 + x}px`;
-    circle.style.top = `${window.innerHeight / 2 + y}px`;
+  // Adjust circle position based on acceleration
+  offsetX += accelerationX * 0.1; // Adjust the scale factor as needed
+  offsetY += accelerationY * 0.1;
+
+  // Limit the movement to the window bounds
+  offsetX = Math.min(window.innerWidth - 50, Math.max(0, offsetX));
+  offsetY = Math.min(window.innerHeight - 50, Math.max(0, offsetY));
+
+  // Set circle position with a transform to improve performance
+  circle.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
 }
