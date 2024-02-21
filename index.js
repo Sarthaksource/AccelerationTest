@@ -1,9 +1,5 @@
-const circle = document.getElementById('circle');
-let offsetX = 0;
-let offsetY = 0;
+const cursor = document.getElementById('circle');
 let isDeviceFlat = false;
-
-const tiltThreshold = 15; // Adjust the threshold as needed
 
 window.addEventListener('deviceorientation', handleOrientation);
 window.addEventListener('devicemotion', handleMotion);
@@ -13,14 +9,7 @@ function handleOrientation(event) {
   const gamma = event.gamma; // Tilt left-to-right
 
   // Check if the device is nearly flat
-  isDeviceFlat = Math.abs(beta) < tiltThreshold && Math.abs(gamma) < tiltThreshold;
-
-  // Reset the circle position when the device is flat
-  if (isDeviceFlat) {
-    offsetX = 0;
-    offsetY = 0;
-    circle.style.transform = 'translate(0, 0)';
-  }
+  isDeviceFlat = Math.abs(beta) < 15 && Math.abs(gamma) < 15;
 }
 
 function handleMotion(event) {
@@ -28,15 +17,13 @@ function handleMotion(event) {
     const accelerationX = event.accelerationIncludingGravity.x;
     const accelerationY = event.accelerationIncludingGravity.y;
 
-    // Adjust circle position based on acceleration with higher sensitivity
-    offsetX += accelerationX * 1.5;
-    offsetY -= accelerationY * 1.5;
+    // Simulate mouse movement based on acceleration
+    const sensitivity = 10; // Adjust sensitivity as needed
+    const offsetX = accelerationX * sensitivity;
+    const offsetY = accelerationY * sensitivity;
 
-    // Limit the movement to the window bounds
-    offsetX = Math.min(window.innerWidth - 50, Math.max(0, offsetX));
-    offsetY = Math.min(window.innerHeight - 50, Math.max(0, offsetY));
-
-    // Set circle position with a transform to improve performance
-    circle.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+    // Update the cursor position
+    cursor.style.left = `${cursor.offsetLeft + offsetX}px`;
+    cursor.style.top = `${cursor.offsetTop - offsetY}px`;
   }
 }
